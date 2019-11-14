@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.BoardMapper">
+
+
+<!-- <select id="getListWithPaging" resultType="com.spring.domain.BoardVO"> 
+		<![CDATA[ select * from tbl_board order by regdate desc limit #{pageNum}, #{amount} ]]> 
+</select> -->
+
+<select id="getList" resultType="com.spring.domain.BoardVO">
+<![CDATA[select*from tbl_board where idx>0 order by regdate desc]]>
+</select>
+
+<select id="insert" resultType="com.spring.domain.BoardVO">
+<![CDATA[insert into tbl_board values(#{idx}, #{title}, #{content}, #{writer}, #{regdate})]]>
+</select>
+
+<select id="read" resultType="com.spring.domain.BoardVO">
+<![CDATA[select * from tbl_board where idx= #{idx}]]>
+</select>
+<select id="delete" resultType="com.spring.domain.BoardVO">
+<![CDATA[delete from tbl_board where idx= #{idx}]]>
+</select>
+<update id="update">
+	update tbl_board set title=#{title}, content=#{content}, writer=#{writer}, regdate=#{regdate} where idx=#{idx}
+</update>
+
+<select id="getTotalCount" resultType="int">
+	select count(*) from tbl_board where idx>0
+</select>
+</mapper>
