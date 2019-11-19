@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.domain.BoardVO;
+import com.spring.domain.Criteria;
+import com.spring.domain.PageDTO;
 import com.spring.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
@@ -21,20 +23,21 @@ public class BoardController {
   @Autowired
   private BoardService service;
   
-  /*
-   * @GetMapping(value = "/main/main2", produces =
-   * {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
-   * public void list(Criteria cri, Model model) { log.info("list" + cri);
-   * model.addAttribute("list", service.getList(cri)); int total =
-   * service.getTotal(cri); log.info("total" + total);
-   * model.addAttribute("pageMaker", new PageDTO(cri, total)); }
-   */
   
-  @GetMapping("/list")
+   @GetMapping("/list")
+   public void list(Criteria cri, Model model) { 
+     log.info("list" + cri);
+   model.addAttribute("list", service.getList(cri)); 
+   int total = service.getTotal(cri); 
+   log.info("total" + total);
+   model.addAttribute("pageMaker", new PageDTO(cri, total)); }
+  
+  
+  /*@GetMapping("/list")
   public void list(Model model) {
     log.info("list");
     model.addAttribute("list", service.getList());
-  }
+  }*/
   
   @PostMapping("/register")
   public String register(BoardVO board, RedirectAttributes rttr) {

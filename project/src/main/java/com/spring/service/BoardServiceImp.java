@@ -39,19 +39,22 @@ public class BoardServiceImp implements BoardService{
     return mapper.delete(idx) == 1;
   }
 
-  /*
-   * @Override public List<BoardVO> getList(Criteria cri) {
-   * log.info("getList criteria :"+ cri);
-   * 
-   * return mapper.getListWithPaging(cri); }
-   */
   
-  @Override
+   @Override
+   public List<BoardVO> getList(Criteria cri) {
+     log.info("getList criteria :"+ cri);
+   
+     return mapper.getListWithPaging(cri); 
+   }
+  
+  
+  /*@Override
   public List<BoardVO> getList() {
     log.info("getList");
     
     return mapper.getList();
   }
+  */
 
   @Override
   public void register(BoardVO board) {

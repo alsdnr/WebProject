@@ -13,9 +13,9 @@ public interface BoardService {
   
   public boolean remove(Long idx);
   
-  public List<BoardVO> getList();
+  //public List<BoardVO> getList();
   
-  /* public List<BoardVO> getList(Criteria cri); */
+   public List<BoardVO> getList(Criteria cri); 
   
   public void register(BoardVO board);
   

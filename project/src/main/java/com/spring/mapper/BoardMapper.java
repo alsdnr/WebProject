@@ -9,8 +9,9 @@ import com.spring.domain.Criteria;
 public interface BoardMapper {
   
   //@Select("select * from tbl_board where idx>0")
-  public List<BoardVO> getList();
-  /* public List<BoardVO> getListWithPaging(Criteria cri); */
+  //public List<BoardVO> getList();
+  
+  public List<BoardVO> getListWithPaging(Criteria cri); 
   
   public void insert(BoardVO board);
   

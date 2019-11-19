@@ -4,9 +4,11 @@
 <mapper namespace="com.spring.mapper.BoardMapper">
 
 
-<!-- <select id="getListWithPaging" resultType="com.spring.domain.BoardVO"> 
-		<![CDATA[ select * from tbl_board order by regdate desc limit #{pageNum}, #{amount} ]]> 
-</select> -->
+<select id="getListWithPaging" resultType="com.spring.domain.BoardVO"> 
+		<![CDATA[  
+		select R1.* from(select * from tbl_board order by idx desc) R1 limit #{pageNum}, #{amount}
+		]]> 
+</select> 
 
 <select id="getList" resultType="com.spring.domain.BoardVO">
 <![CDATA[select*from tbl_board where idx>0 order by regdate desc]]>
