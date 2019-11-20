@@ -16,8 +16,8 @@
 	
 	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/main" access="permitAll"/>
-		<security:intercept-url pattern="/main/main2" access="hasRole('ROLE_MEMBER')"/>
-		<security:intercept-url pattern="/main/main3" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/main/main2" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/board/*" access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')"/>
 		<security:form-login login-page="/main"
 		username-parameter="email"
 		password-parameter="pw" 		

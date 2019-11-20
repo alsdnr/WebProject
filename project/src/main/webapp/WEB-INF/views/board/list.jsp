@@ -60,7 +60,8 @@ $(".paginate_button a").on("click", function(e) {
    		<c:forEach items="${list}" var="board">
 			<tr>
 				<td><c:out value="${board.idx}" /></td>
-				<td><a class='move' href='<c:out value="${board.idx}"/>'><c:out value="${board.title}" /></a></td>
+				<td><a class='move' href='/board/get?idx=<c:out value="${board.idx}"/>'>
+				<c:out value="${board.title}" /></a></td>
 				<td><c:out value="${board.writer}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
 			</tr>
@@ -78,11 +79,15 @@ $(".paginate_button a").on("click", function(e) {
   <c:if test="${pageMaker.next}">
 	<li class="paginate_button next"><a	href="${pageMaker.endPage +1 }">Next</a></li>
   </c:if>
+	<li class="paginate_button"><a href="${pageContext.request.contextPath}/board/register">글쓰기</a></li>
 </div>
 <form id='actionForm' action="/board/list" method='get'>
 				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 </form>
+			
+
+<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
 </body>
 </html>
 <%@ include file="../include/footer.jsp"%>

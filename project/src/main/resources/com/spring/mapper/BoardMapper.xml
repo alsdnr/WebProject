@@ -15,7 +15,7 @@
 </select>
 
 <select id="insert" resultType="com.spring.domain.BoardVO">
-<![CDATA[insert into tbl_board values(#{idx}, #{title}, #{content}, #{writer}, #{regdate})]]>
+<![CDATA[insert into tbl_board(title, content, writer) values(#{title}, #{content}, #{writer})]]>
 </select>
 
 <select id="read" resultType="com.spring.domain.BoardVO">

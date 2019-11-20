@@ -17,7 +17,6 @@ START MODULE AREA 1: header1
     </div>
     <div data-layout="al16 de6" class="MOD_HEADER1_Details">
       <div class="btn-group">
-    	<button type="button" class="btn btn-primary">friend</button>
    	 <button type="button" class="btn btn-primary">board</button>
     	<button type="button" class="btn btn-primary" onclick="location.href='logout'">logout</button>
       </div><br/>			

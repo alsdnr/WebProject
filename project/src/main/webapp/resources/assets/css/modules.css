@@ -12,6 +12,10 @@ body header {
     padding: 1.3em;
 }
 
+.paginate_button {
+	padding: 1em;
+	list-style:none;
+}
 .good {
 	float:left;
 }
@@ -30,6 +34,7 @@ body header {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  background-color: aliceblue;
 }
 @media (min-width: 768px) {
   .container {

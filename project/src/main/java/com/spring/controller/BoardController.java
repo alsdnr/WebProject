@@ -48,9 +48,9 @@ public class BoardController {
     return "redirect:/board/list";
   }
   
-  @GetMapping("/get")
+  @GetMapping({"/get","/modify"})
   public void get(@RequestParam("idx") Long idx, Model model) {
-    log.info("/get");
+    log.info("/get or modify");
     model.addAttribute("board", service.get(idx));
   }
   
@@ -77,4 +77,9 @@ public class BoardController {
    * MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
    * public BoardVO listAj(Model model) { }
    */
+  
+  @GetMapping("/register")
+  public void register() {
+    
+  }
 }
