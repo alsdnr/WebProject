@@ -7,12 +7,12 @@
 <![CDATA[select*from users]]>
 </select>
 
-<select id="insert" resultType="com.spring.domain.MemberVO">
+<insert id="insert">
 	insert into users (email, pw, name, nickName) values(#{email}, #{pw}, #{name}, #{nickName})
-</select>
-<select id="insertAuth" resultType="com.spring.domain.AuthVO">
+</insert>
+<insert id="insertAuth">
 	insert into authorities (email) values (#{email}) 
-</select>
+</insert>
 
 <resultMap type="com.spring.domain.MemberVO" id="memberMap">
 	<id property="email" column="email"/>
@@ -34,9 +34,9 @@
 	users mem left outer join authorities on mem.email = authorities.email
 	where mem.email = #{email}
 </select>
-<select id="delete" resultType="com.spring.domain.MemberVO">
+<delete id="delete">
 <![CDATA[delete from users where email= #{email}]]>
-</select>
+</delete>
 <update id="update">
 	update users set pw=#{pw}, nickName=#{nickName} where email=#{email}
 </update>

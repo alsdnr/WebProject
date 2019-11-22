@@ -2,52 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <link rel="stylesheet" href=<c:url value="/resources/assets/css/style.min.css" /> />
-  <link rel="stylesheet" href=<c:url value="/resources/assets/css/modules.css" /> />
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    var result = '<c:out value="${result}"/>';
-    checkModal(result);
-    history.replaceState({}, null, null);
-    
-    function checkModal(result) {
-if (result === '' || history.state) {
-return;
-}
-if (parseInt(result) > 0) {
-  $(".modal-body").html(
-	"게시글 " + parseInt(result) + " 번이 등록되었습니다.");
-}
-$("#myModal").modal("show");
-}
-    
-$("#regBtn").on("click", function() {
-self.location = "/board/register";
-});
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Tables</h1>
+		<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-var actionForm = $("#actionForm");
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Board List Page
+				<button id='regBtn' type="button" class="btn btn-xs pull-right">
+				글쓰기
+				</button>
+			</div>
 
-$(".paginate_button a").on("click", function(e) {
-	e.preventDefault();
-	console.log('click');
-	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-	actionForm.submit();
-});
-});
-</script>
-<title>List Page</title>
-</head>
-<body>
-<div class="container">
-  <h2>Basic Table</h2>
-  <table class="table">
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
         <th>No</th>
@@ -69,17 +46,16 @@ $(".paginate_button a").on("click", function(e) {
     </tbody>
   </table>
   <c:if test="${pageMaker.prev}">
-  	<li class="paginate_button previous"><a	href="${pageMaker.startPage -1}">Previous</a></li>
+  	<li class="paginate_button previous"><a	href="${pageMaker.startPage-1}">Previous</a></li>
   </c:if>
   <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 	<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-		<a href="${num*10-9}">${num}</a>
+		<a href="${(num-1)*10}">${num}</a>
 	</li>
   </c:forEach>
   <c:if test="${pageMaker.next}">
 	<li class="paginate_button next"><a	href="${pageMaker.endPage +1 }">Next</a></li>
   </c:if>
-	<li class="paginate_button"><a href="${pageContext.request.contextPath}/board/register">글쓰기</a></li>
 </div>
 <form id='actionForm' action="/board/list" method='get'>
 				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
@@ -87,7 +63,67 @@ $(".paginate_button a").on("click", function(e) {
 </form>
 			
 
-<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
-</body>
-</html>
+
+
+<!-- Modal  추가 -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+						</div>
+						<div class="modal-body">처리가 완료되었습니다.</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save
+								changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+		</div>
+		<!--  end panel-body -->
+</div>
+	<!-- end panel -->
+</div>
+<!-- row -->
+<script type="text/javascript">
+$(document).ready(function() {
+     var result = '<c:out value="${result}"/>';
+     console.log(result);
+    checkModal(result);
+    
+    function checkModal(result) {
+	if (result === '') {
+	return;
+	}
+	if (parseInt(result) > 0) {
+ 	 $(".modal-body").html(
+		"게시글 " + parseInt(idx) + " 번이 등록되었습니다.");
+	}
+	$("#myModal").modal('show');
+	} 
+    
+$("#regBtn").on("click", function() {
+self.location = "/board/register";
+});
+
+var actionForm = $("#actionForm");
+
+$(".paginate_button a").on("click", function(e) {
+	e.preventDefault();
+	console.log('click');
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	actionForm.submit();
+});
+});
+</script>
 <%@ include file="../include/footer.jsp"%>

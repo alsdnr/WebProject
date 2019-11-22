@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.MemberMapper">
+
+<select id="getList" resultType="com.spring.domain.MemberVO">
+<![CDATA[select*from users]]>
+</select>
+
+<insert id="insert">
+	insert into users (email, pw, name, nickName) values(#{email}, #{pw}, #{name}, #{nickName})
+</insert>
+<insert id="insertAuth">
+	insert into authorities (email) values (#{email}) 
+</insert>
+
+<resultMap type="com.spring.domain.MemberVO" id="memberMap">
+	<id property="email" column="email"/>
+	<result property="email" column="email"/>
+	<result property="pw" column="pw"/>
+	<result property="name" column="name"/>
+	<result property="nickName" column="nickName"/>
+	<collection property="authList" resultMap="authMap">
+	</collection>
+</resultMap>
+
+<resultMap type="com.spring.domain.AuthVO" id="authMap">
+	<result property="email" column="email"/>
+	<result property="authority" column="authority"/>
+</resultMap>
+
+<select id="read" resultMap="memberMap">
+	select mem.email, pw, name, nickName, enabled, authority from
+	users mem left outer join authorities on mem.email = authorities.email
+	where mem.email = #{email}
+</select>
+<delete id="delete">
+<![CDATA[delete from users where email= #{email}]]>
+</delete>
+<update id="update">
+	update users set pw=#{pw}, nickName=#{nickName} where email=#{email}
+</update>
+</mapper>

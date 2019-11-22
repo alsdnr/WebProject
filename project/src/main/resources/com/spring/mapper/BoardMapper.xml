@@ -6,7 +6,8 @@
 
 <select id="getListWithPaging" resultType="com.spring.domain.BoardVO"> 
 		<![CDATA[  
-		select R1.* from(select * from tbl_board order by idx desc) R1 limit #{pageNum}, #{amount}
+		select R1.* from(select @rownum:=@rownum+1, A.* from tbl_board A, (select @rownum:=0) R order by idx desc)
+		R1 limit #{pageNum}, #{amount}  
 		]]> 
 </select> 
 
@@ -14,16 +15,16 @@
 <![CDATA[select*from tbl_board where idx>0 order by regdate desc]]>
 </select>
 
-<select id="insert" resultType="com.spring.domain.BoardVO">
+<insert id="insert">
 <![CDATA[insert into tbl_board(title, content, writer) values(#{title}, #{content}, #{writer})]]>
-</select>
+</insert>
 
 <select id="read" resultType="com.spring.domain.BoardVO">
 <![CDATA[select * from tbl_board where idx= #{idx}]]>
 </select>
-<select id="delete" resultType="com.spring.domain.BoardVO">
+<delete id="delete">
 <![CDATA[delete from tbl_board where idx= #{idx}]]>
-</select>
+</delete>
 <update id="update">
 	update tbl_board set title=#{title}, content=#{content}, writer=#{writer}, regdate=#{regdate} where idx=#{idx}
 </update>

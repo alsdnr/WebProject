@@ -66,9 +66,11 @@ public class BoardController {
   @PostMapping("/remove")
   public String remove(@RequestParam("idx") Long idx, RedirectAttributes rttr) {
     log.info("remove" + idx);
+    
     if(service.remove(idx)) {
-      rttr.addFlashAttribute("result", "success");
-    }
+      rttr.addFlashAttribute("result", "success"); 
+      }
+    
     return "redirect:/board/list";
   }
   

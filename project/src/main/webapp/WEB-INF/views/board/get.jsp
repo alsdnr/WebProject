@@ -2,17 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="../include/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>get</title>
-<link rel="stylesheet" href=<c:url value="/resources/assets/css/style.min.css" /> />
-<link rel="stylesheet" href=<c:url value="/resources/assets/css/modules.css" /> />
-    
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="/resources/assets/js/reply.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
   console.log(replyService);
@@ -35,8 +25,6 @@ $(document).ready(function() {
   });  
 });
 </script>
-</head>
-<body>
 	<div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">Board Read</h1>
@@ -52,9 +40,11 @@ $(document).ready(function() {
       <div class="panel-heading">Board Read Page</div>
       <!-- /.panel-heading -->
       <div class="panel-body">
-
+	  
+	  <form role="form" action="/board/modify" method="post">
+	  
           <div class="form-group">
-          <label>idx</label> <input class="form-control" name='bno'
+          <label>idx</label> <input class="form-control" name='idx'
             value='<c:out value="${board.idx }"/>' readonly="readonly">
         </div>
 
@@ -65,7 +55,7 @@ $(document).ready(function() {
 
         <div class="form-group">
           <label>Text area</label>
-          <textarea class="form-control" rows="3" name='content'
+          <textarea class="form-control" rows="10" name='content'
             readonly="readonly"><c:out value="${board.content}" /></textarea>
         </div>
 
@@ -73,31 +63,13 @@ $(document).ready(function() {
           <label>Writer</label> <input class="form-control" name='writer'
             value='<c:out value="${board.writer }"/>' readonly="readonly">
         </div>
-
-<%-- 		<button data-oper='modify' class="btn btn-default">
-        <a href="/board/modify?bno=<c:out value="${board.bno}"/>">Modify</a></button>
-        <button data-oper='list' class="btn btn-info">
-        <a href="/board/list">List</a></button> --%>
-
-
-<button data-oper='modify' class="btn btn-default">Modify</button>
-<button data-oper='list' class="btn btn-info">List</button>
-
-<form id='operForm' action="/board/modify" method="get">
-  <input type='hidden' id='idx' name='idx' value='<c:out value="${board.idx}"/>'>
-</form> 
-
-
-<%-- <form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-  <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
-  <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-  <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
- 
-</form> --%>
-
-
+		<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />	
+		<button type="submit" data-oper='modify' class="btn btn-default">
+        <a href="/board/modify?idx=<c:out value="${board.idx}"/>">Modify</a></button>
+        <button type="submit" data-oper='list' class="btn btn-info">
+        <a href="/board/list">List</a></button> 
+		
+	</form>
 
       </div>
       <!--  end panel-body -->
@@ -108,7 +80,4 @@ $(document).ready(function() {
   <!-- end panel -->
 </div>
 <!-- /.row -->
-<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
-</body>
-</html>
 <%@ include file="../include/footer.jsp"%>
