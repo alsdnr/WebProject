@@ -23,6 +23,6 @@ public interface ReplyMapper {
         @Param("idx") Long idx
    );
    
-   public int getCountByBno(Long bno);
+   public int getCountByidx(Long bno);
   
 }

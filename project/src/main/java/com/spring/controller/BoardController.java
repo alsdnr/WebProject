@@ -1,6 +1,7 @@
 package com.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,9 @@ public class BoardController {
   }*/
   
   @PostMapping("/register")
+  @PreAuthorize("isAuthenticated()")
   public String register(BoardVO board, RedirectAttributes rttr) {
+    
     log.info("register:" + board);
     service.register(board);
     rttr.addFlashAttribute("result", board.getIdx());
@@ -63,6 +66,7 @@ public class BoardController {
     }
     return "redirect:/board/list";
   }
+  @PreAuthorize("principal.username == #writer")
   @PostMapping("/remove")
   public String remove(@RequestParam("idx") Long idx, RedirectAttributes rttr) {
     log.info("remove" + idx);
@@ -81,6 +85,7 @@ public class BoardController {
    */
   
   @GetMapping("/register")
+  @PreAuthorize("isAuthenticated()")
   public void register() {
     
   }

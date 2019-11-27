@@ -45,17 +45,21 @@
 		</c:forEach>
     </tbody>
   </table>
-  <c:if test="${pageMaker.prev}">
-  	<li class="paginate_button previous"><a	href="${pageMaker.startPage-1}">Previous</a></li>
-  </c:if>
-  <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
-		<a href="${(num-1)*10}">${num}</a>
-	</li>
-  </c:forEach>
-  <c:if test="${pageMaker.next}">
-	<li class="paginate_button next"><a	href="${pageMaker.endPage +1 }">Next</a></li>
-  </c:if>
+  <div class='pull-right'>
+	<ul class="pagination">
+	  <c:if test="${pageMaker.prev}">
+	  	<li class="paginate_button previous"><a	href="${pageMaker.startPage-1}">Previous</a></li>
+	  </c:if>
+	  <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+		<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+			<a href="${(num-1)*10}">${num}</a>
+		</li>
+	  </c:forEach>
+	  <c:if test="${pageMaker.next}">
+		<li class="paginate_button next"><a	href="${pageMaker.endPage +1 }">Next</a></li>
+	  </c:if>
+	</ul>
+   </div>
 </div>
 <form id='actionForm' action="/board/list" method='get'>
 				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
@@ -107,7 +111,7 @@ $(document).ready(function() {
 	}
 	if (parseInt(result) > 0) {
  	 $(".modal-body").html(
-		"게시글 " + parseInt(idx) + " 번이 등록되었습니다.");
+		"게시글이 등록되었습니다.");
 	}
 	$("#myModal").modal('show');
 	} 
