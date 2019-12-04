@@ -15,9 +15,7 @@
 	 	select * from reply where idx = #{idx} limit #{cri.pageNum}, #{cri.amount}
 	</select>
 	<select id="getCountByidx" resultType="int">
-		<![CDATA[
 		select count(rno) from reply where idx = #{idx}
-		]]>
 	</select>
 	
 	<delete id="delete">
@@ -25,6 +23,6 @@
 	</delete>
 	
 	<update id="update">
-		update reply set reply = #{reply}, replyDate = sysdate where rno = #{rno}
+		update reply set reply = #{reply}, replyDate = #{replyDate} where rno = #{rno}
 	</update>
 </mapper>

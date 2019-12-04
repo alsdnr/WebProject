@@ -42,6 +42,10 @@ audio:not([controls]) {
 template {
   display: none;
 }
+
+.mainBoard {
+}
+
 a {
   background-color: transparent;
 }

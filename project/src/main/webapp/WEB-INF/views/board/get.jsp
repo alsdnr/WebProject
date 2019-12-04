@@ -149,10 +149,34 @@ $(document).ready(function() {
 	            
 	      });
 	    });
-	   
+	   	
+	  
 	    modalModBtn.on("click", function(e){
 	    	  
-	     	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
+			var originalReplyer = modalInputReplyer.val();
+	    	
+	    	var reply = {
+	    		rno:modal.data("rno"),
+	    		reply:modalInputReply.val(),
+	    		replyer:originalReplyer
+	    	};
+	    	
+	     	  
+	     if(!replyer){
+	   		  modal.modal("hide");
+	   		  return;
+	   	  }
+	   	  
+	   	  
+	   	  console.log("Original Replyer: " + originalReplyer);
+	   	  
+	   	  if(replyer  != originalReplyer){
+	   		  
+	   		  alert("자신이 작성한 댓글만 수정이 가능합니다.");
+	   		  modal.modal("hide");
+	   		  return;
+	   		  
+	   	  }
 	     	  
 	     	  replyService.update(reply, function(result){
 	     	        
@@ -163,12 +187,30 @@ $(document).ready(function() {
 	     	  });
 	     	  
 	     	});
-
+	    
 	    modalRemoveBtn.on("click", function (e){
 	     	  
 	     	  var rno = modal.data("rno");
+	     	  console.log("RNO: " + rno);
+	     	  console.log("REPLYER: " + replyer);
 	     	  
-	     	  replyService.remove(rno, function(result){
+	     	  if(!replyer) {
+	     		  modal.modal("hide");
+	     		  return;
+	     	  }
+	     	  
+	     	  var originalReplyer = modalInputReplyer.val();
+	     	  
+	     	  console.log("Original Replyer: " + originalReplyer);
+	     	  
+	     	  if(replyer != originalReplyer){
+	     		  alert("자신이 작성한 댓글만 삭제 가능합니다.");
+	     		  modal.modal("hide");
+	     		  return;
+	     		  
+	     	  }
+	     	  
+	     	  replyService.remove(rno, originalReplyer, function(result){
 	     	        
 	     	      alert(result);
 	     	      modal.modal("hide");

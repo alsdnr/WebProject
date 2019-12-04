@@ -68,4 +68,10 @@ public class BoardServiceImp implements BoardService{
     
     return mapper.getTotalCount(cri);
   }
+
+  @Override
+  public int updateView(Long idx) {
+    log.info("cnt");
+    return mapper.updateViewCnt(idx);
+  }
 }

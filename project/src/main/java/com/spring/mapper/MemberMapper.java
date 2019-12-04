@@ -18,4 +18,6 @@ public interface MemberMapper {
   public int delete(String email);
   
   public int update(MemberVO member);
+  
+  public MemberVO info(String email);
 }

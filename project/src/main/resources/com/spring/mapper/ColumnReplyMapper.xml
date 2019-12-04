@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.ColumnReplyMapper">
+	<insert id="insert">
+		insert into Column_reply(idx, reply, replyer) values (#{idx}, #{reply}, #{replyer})
+	</insert>
+	
+	<select id="read" resultType="com.spring.domain.ReplyVO">
+		select * from Column_reply where rno = #{rno}
+	</select>
+	
+	<select id="getListWithPaging" resultType="com.spring.domain.ReplyVO">
+	 	select * from Column_reply where idx = #{idx} limit #{cri.pageNum}, #{cri.amount}
+	</select>
+	<select id="getCountByidx" resultType="int">
+		select count(rno) from Column_reply where idx = #{idx}
+	</select>
+	
+	<delete id="delete">
+		delete from Column_reply where rno = #{rno}
+	</delete>
+	
+	<update id="update">
+		update Column_reply set reply = #{reply}, replyDate = #{replyDate} where rno = #{rno}
+	</update>
+</mapper>

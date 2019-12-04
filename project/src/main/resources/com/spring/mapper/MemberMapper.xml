@@ -4,7 +4,7 @@
 <mapper namespace="com.spring.mapper.MemberMapper">
 
 <select id="getList" resultType="com.spring.domain.MemberVO">
-<![CDATA[select*from users]]>
+	select*from users
 </select>
 
 <insert id="insert">
@@ -35,9 +35,13 @@
 	where mem.email = #{email}
 </select>
 <delete id="delete">
-<![CDATA[delete from users where email= #{email}]]>
+	delete from users where email= #{email}
 </delete>
 <update id="update">
 	update users set pw=#{pw}, nickName=#{nickName} where email=#{email}
 </update>
+
+<select id="info" resultType="com.spring.domain.MemberVO">
+	select * from users where email=#{email}
+</select>
 </mapper>

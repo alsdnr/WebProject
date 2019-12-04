@@ -12,7 +12,7 @@ public interface ReplyService {
   
   public ReplyVO get(Long rno);
   
-  public int Modify(ReplyVO vo);
+  public int modify(ReplyVO vo);
   
   public int remove(Long rno);
   

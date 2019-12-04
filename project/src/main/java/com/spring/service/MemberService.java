@@ -16,4 +16,6 @@ public interface MemberService {
   public boolean remove(String email);
   
   public List<MemberVO> getList();
+  
+  public MemberVO info(String email);
 }

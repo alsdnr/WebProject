@@ -51,4 +51,10 @@ public class MemberServiceImp implements MemberService{
     log.info("getList");
     return mapper.getList();
   }
+
+  @Override
+  public MemberVO info(String email) {
+    log.info("info");
+    return mapper.info(email);
+  }
 }

@@ -73,4 +73,10 @@ public class MemberController {
   public void register() {
     
   }
+  
+  @GetMapping("/memberInfo")
+  public void Info(@RequestParam("email") String email, Model model) {
+    log.info("/memberInfo");
+    model.addAttribute("member", service.info(email));
+  }
 }

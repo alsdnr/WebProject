@@ -33,7 +33,7 @@ public class ReplyServiceImp implements ReplyService{
   }
 
   @Override
-  public int Modify(ReplyVO vo) {
+  public int modify(ReplyVO vo) {
     log.info("modify: "+vo); 
     return mapper.update(vo);
   }
@@ -41,6 +41,9 @@ public class ReplyServiceImp implements ReplyService{
   @Override
   public int remove(Long rno) {
     log.info("remove: "+rno);
+    
+    ReplyVO vo = mapper.read(rno);
+    
     return mapper.delete(rno);
   }
 

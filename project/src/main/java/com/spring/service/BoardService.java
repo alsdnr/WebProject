@@ -20,4 +20,6 @@ public interface BoardService {
   public void register(BoardVO board);
   
   public int getTotal(Criteria cri);
+  
+  public int updateView(Long idx);
 }
